@@ -14,6 +14,10 @@ public class Main {
 
         System.out.println("Memoria libre: "+memoriaLibre+" Mib\nMemoria total: "+memoriaTotal+" Mib\nMemoria en uso: "+memoriaUso+" Mib");
         System.out.println("Numero de procesadores: "+rt.availableProcessors());
-        System.out.println(System.getProperties()); // Propiedades de la clase system
+
+        String [] propiedades = System.getProperties().toString().split(",");
+        for (int i = 0; i<propiedades.length;i++){
+            System.out.println(i+": "+propiedades[i]);
+        }
     }
 }
