@@ -12,12 +12,13 @@ public class Main {
         String comando = "ls";
         String SO = System.getProperty("os.name").toLowerCase();
 
+        //Comprobamos que si el dispositivo es windows cambiamos el comando usado
         if (SO.equals("windows")){
             comando = "dir";
         }
 
         ProcessBuilder pDir = new ProcessBuilder(comando);
-        pDir.inheritIO();
+        pDir.inheritIO(); // Cambiamos la salida por defecto del proceso a la consola de Java
 
         System.out.println("Propiedad user.dir = "+System.getProperty("user.dir")+"\n");
 
@@ -27,14 +28,14 @@ public class Main {
         System.out.println();
 
         //Cambiamos la propiedad user.dir
-        System.setProperty("user.dir","/home/dam/Documentos/PSP/Tarea2");
+        System.setProperty("user.dir",System.getProperty("user.home"));
         System.out.println("Propiedad user.dir = "+System.getProperty("user.dir")+"\n");
 
         System.out.println(pDir.command());
         Process pSubDir2 = pDir.start();
 
         //Cambiamos la propiedad user.dir
-        System.setProperty("user.dir","/tmp");
+        System.setProperty("user.dir",System.getProperty("java.io.tmpdir"));
         System.out.println("\nPropiedad user.dir = "+System.getProperty("user.dir")+"\n");
 
         System.out.println(pDir.command());
