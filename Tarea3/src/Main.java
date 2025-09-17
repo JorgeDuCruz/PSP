@@ -7,10 +7,13 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("Escribe el nombre del fichero que quieras abrir/crea o su ruta completa (Añadir extension del archivo tambien)");
         fichero = sc.nextLine();
+        /* Codigo para asegurarse que le añade extension pero no es necesario su uso actual y no esta totalmente pulida
         while (!fichero.contains(".")){
             System.out.println("Necesita añadir la extension del archivo");
             fichero = sc.next();
         }
+
+         */
 
         ProcessBuilder blocNotas = new ProcessBuilder("gnome-text-editor", fichero);
         try {
