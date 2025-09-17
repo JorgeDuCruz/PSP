@@ -10,13 +10,35 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         String comando = "ls";
+        String SO = System.getProperty("os.name").toLowerCase();
+
+        if (SO.equals("windows")){
+            comando = "dir";
+        }
+
         ProcessBuilder pDir = new ProcessBuilder(comando);
         pDir.inheritIO();
-        Process pSubDir = pDir.start();
+
+        System.out.println("Propiedad user.dir = "+System.getProperty("user.dir")+"\n");
+
         System.out.println(pDir.command());
-        System.out.println(System.getProperty("user.dir"));
+        Process pSubDir = pDir.start();
+
+        System.out.println();
+
+        //Cambiamos la propiedad user.dir
         System.setProperty("user.dir","/home/dam/Documentos/PSP/Tarea2");
-        System.out.println(System.getProperty("user.dir"));
+        System.out.println("Propiedad user.dir = "+System.getProperty("user.dir")+"\n");
+
+        System.out.println(pDir.command());
         Process pSubDir2 = pDir.start();
+
+        //Cambiamos la propiedad user.dir
+        System.setProperty("user.dir","/tmp");
+        System.out.println("\nPropiedad user.dir = "+System.getProperty("user.dir")+"\n");
+
+        System.out.println(pDir.command());
+        Process pSubDir3 = pDir.start();
+
     }
 }
