@@ -7,7 +7,7 @@ public class HilosProfesor  extends Thread{
 
     @Override
     public void run(){
-        for (int i = 0;i<paciencia;i++){
+        for (int i = 1;i<paciencia;i++){
             System.out.println("["+getName()+"] Cabreo nivel: "+i);
         }
         System.out.println("["+getName()+"] Cabreo nivel: "+paciencia+"... ¡He llegado a mi límite!");
