@@ -27,7 +27,13 @@ public class HilosDomino extends Thread {
              hiloHijo.start();
          }
          while (iteracion<=5){
-             System.out.println("Soy el hilo-"+nHilo+" iteracion: "+iteracion);
+             int dormir = (int)(Math.random()*500+100);
+             try {
+                 Thread.sleep(dormir);
+             } catch (InterruptedException e) {
+                 System.out.println("Interrumpido el sleep en el hilo "+nHilo+" "+e.getMessage());
+             }
+             System.out.println("Soy [hilo-"+nHilo+"] iteracion: "+iteracion);
              iteracion++;
          }
          try {
@@ -36,7 +42,7 @@ public class HilosDomino extends Thread {
              }
              System.out.println("Acabo hilo-"+nHilo);
          } catch (InterruptedException e) {
-             throw new RuntimeException(e);
+             System.out.println("Interrumpido el join en el hilo "+nHilo+" "+e.getMessage());
          }
 
      }
