@@ -2,17 +2,28 @@ public class HilosDomino extends Thread {
     private int iteracion;
     private int nHilo;
     private Thread hiloHijo;
+    private int limiteCadena;
 
-     public HilosDomino(int nHilo){
+     public HilosDomino(int nHilo,int limiteCadena){
          super();
          this.nHilo = nHilo;
          this.iteracion=1;
+         setLimiteCadena(limiteCadena);
      }
 
-     @Override
+    public void setLimiteCadena(int limiteCadena) {
+        if (limiteCadena>=1){
+            this.limiteCadena = limiteCadena;
+        }
+        else {
+            this.limiteCadena = 5;
+        }
+    }
+
+    @Override
     public void run(){
-         if (nHilo<5){
-             hiloHijo = new HilosDomino(nHilo+1);
+         if (nHilo<limiteCadena){
+             hiloHijo = new HilosDomino(nHilo+1,limiteCadena);
              hiloHijo.start();
          }
          while (iteracion<=5){
