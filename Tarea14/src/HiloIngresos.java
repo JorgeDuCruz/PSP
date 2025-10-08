@@ -1,4 +1,9 @@
 public class HiloIngresos extends Thread{
+
+    public HiloIngresos(){
+        super();
+    }
+
     @Override
     public void run(){
         for (int i=0;i<5000;i++ ){
