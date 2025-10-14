@@ -1,20 +1,29 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
-        String texto = "Prueba de cUantas vocales deteCTA";
-        Scanner sc = new Scanner(System.in);
+        StringBuilder texto = new StringBuilder();
+        String linea;
+        try {
+            BufferedReader leer = new BufferedReader(new FileReader("texto.txt"));
+            while (true){
+                linea = leer.readLine();
+                if (linea==null){
+                    break;
+                }
+                texto.append(linea);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Fichero no encontrado "+e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error al leer el fichero "+e.getMessage());
+        }
 
-        System.out.println("Escribe el texto para contar sus vocales");
-        texto = sc.nextLine();
-        sc.close();
-
-
-        HilosVocales a = new HilosVocales('a',texto);
-        HilosVocales e = new HilosVocales('e',texto);
-        HilosVocales i = new HilosVocales('i',texto);
-        HilosVocales o = new HilosVocales('o',texto);
-        HilosVocales u = new HilosVocales('u',texto);
+        HilosVocales a = new HilosVocales('a', texto.toString());
+        HilosVocales e = new HilosVocales('e', texto.toString());
+        HilosVocales i = new HilosVocales('i', texto.toString());
+        HilosVocales o = new HilosVocales('o', texto.toString());
+        HilosVocales u = new HilosVocales('u', texto.toString());
         a.start();
         e.start();
         i.start();
