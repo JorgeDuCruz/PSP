@@ -9,7 +9,6 @@ public class HilosVocales extends Thread{
 
     @Override
     public void run(){
-        texto = texto.toLowerCase();
         for (int i = 0;i<texto.length();i++){
             if (texto.charAt(i) == vocal){
                 Contador.sumar();

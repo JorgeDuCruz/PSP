@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
-        StringBuilder texto = new StringBuilder();
+        String texto="";
         String linea;
         try {
             BufferedReader leer = new BufferedReader(new FileReader("texto.txt"));
@@ -11,19 +11,28 @@ public class Main {
                 if (linea==null){
                     break;
                 }
-                texto.append(linea);
+                texto =texto+linea;
             }
+            //Convierte el texto a un formato más simple para la comparación de los hilos
+            texto = texto.toLowerCase();
+            texto = texto.replace("í","i");
+            texto = texto.replace("é","e");
+            texto = texto.replace("á","a");
+            texto = texto.replace("ó","o");
+            texto = texto.replace("ú","u");
+
+
         } catch (FileNotFoundException e) {
             System.out.println("Fichero no encontrado "+e.getMessage());
         } catch (IOException e) {
             System.out.println("Error al leer el fichero "+e.getMessage());
         }
 
-        HilosVocales a = new HilosVocales('a', texto.toString());
-        HilosVocales e = new HilosVocales('e', texto.toString());
-        HilosVocales i = new HilosVocales('i', texto.toString());
-        HilosVocales o = new HilosVocales('o', texto.toString());
-        HilosVocales u = new HilosVocales('u', texto.toString());
+        HilosVocales a = new HilosVocales('a', texto);
+        HilosVocales e = new HilosVocales('e', texto);
+        HilosVocales i = new HilosVocales('i', texto);
+        HilosVocales o = new HilosVocales('o', texto);
+        HilosVocales u = new HilosVocales('u', texto);
         a.start();
         e.start();
         i.start();
