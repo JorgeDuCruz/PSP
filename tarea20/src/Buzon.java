@@ -15,7 +15,7 @@ public class Buzon {
         notifyAll();
     }
 
-    public  String leerMensaje(){
+    public  synchronized String leerMensaje(){
         while (mensaje == null){
             System.out.println("Buzón vacio esperando");
             try {
@@ -26,6 +26,7 @@ public class Buzon {
         }
         String msj = mensaje;
         mensaje = null;
+        notifyAll();
         return msj;
     }
 }
