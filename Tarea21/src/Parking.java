@@ -14,14 +14,14 @@ public class Parking {
     private int buscarCoche(int coche) {
         for (int i = 0;i<plazas.length;i++){
             if (plazas[i] == coche){
-                return i;
+                return i; // Devuelve la posición del coche que se busca
             }
         }
-        return -1;
+        return -1; // Si no encuentra al coche en el parking devuelve -1
     }
 
     public synchronized void aparcar(int coche){
-        while (plazaLibre() == -1){
+        while (plazaLibre() == -1){ // Comprueba si el parking está lleno y mientras lo esté que los coches esperen
             System.out.println("Coche "+coche+" en espera");
             try {
                 wait();
@@ -32,12 +32,11 @@ public class Parking {
         int plaza = plazaLibre();
         plazas[plaza] = coche;
         System.out.println("Entrada: Coche "+coche+" aparcando en "+plaza+"\n"+Arrays.toString(plazas));
-
     }
 
     public synchronized void salir(int coche){
         int plaza = buscarCoche(coche);
-        if (plaza != -1){
+        if (plaza != -1){ // Se asegura de que el coche que intenta salir está en primer lugar aparcado
             plazas[plaza] = 0;
             System.out.println("Salida: Coche "+coche+" saliendo de "+plaza+"\n"+Arrays.toString(plazas));
             notifyAll();

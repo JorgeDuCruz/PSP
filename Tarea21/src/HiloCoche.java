@@ -32,7 +32,7 @@ public class HiloCoche extends Thread{
         }
     }
     private long numeroAleatorio(){
-        long tiempo = Math.round(Math.random()*100)+100;
+        long tiempo = Math.round(Math.random()*1000)+100;
         return tiempo;
     }
 }
