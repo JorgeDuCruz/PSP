@@ -1,9 +1,15 @@
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 public class Main {
     static void main() {
         DecimalFormat df = new DecimalFormat("#.00");
-        int N=3,M=8;
+        Scanner sc = new Scanner(System.in);
+        int N,M;
+        System.out.println("Elige cuantas cajas tendrá el mercado");
+        N = sc.nextInt();
+        System.out.println("Elige cuantos clientes tendrá el mercado");
+        M = sc.nextInt();
         SuperMercado n = new SuperMercado(N);
         Cliente[] clientes = new Cliente[M];
         for (int i = 0;i<M;i++){
