@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,7 +29,10 @@ public class Main {
                Socket socket = new Socket(ip, puerto);
                resumen.add("IP:"+ip+" Puerto:"+puerto+" Abierto");
                socket.close();
-           } catch (IOException e) {
+           }catch (UnknownHostException e) {
+               System.out.println("Host desconocido: "+e.getMessage());
+           }
+           catch (IOException e) {
                resumen.add("IP:"+ip+" Puerto:"+puerto+" cerrado");
            }
        }
