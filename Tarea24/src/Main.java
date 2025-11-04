@@ -18,7 +18,7 @@ public class Main {
         }
 
         try {
-            InetAddress local = InetAddress.getLocalHost();
+            InetAddress local = InetAddress.getByName(null);
             System.out.println("Local: "+local.getHostName()+" - "+local.getHostAddress());
         } catch (UnknownHostException e) {
             System.out.println("Host local no encontrado: "+e.getLocalizedMessage());
