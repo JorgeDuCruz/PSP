@@ -21,7 +21,7 @@ public class Cliente {
 
             while (true) {
                 System.out.println("Escribe un mensaje");
-                mensaje = sc.next();
+                mensaje = sc.nextLine();
 
                 escritor.println(mensaje);
                 respuesta = lector.readLine();
