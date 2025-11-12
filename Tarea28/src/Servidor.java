@@ -11,6 +11,7 @@ public class Servidor {
 
             while (true){
                 Socket cliente = server.accept();
+                System.out.println("Cliente Conectado");
                 HiloServidor h1 = new HiloServidor(cliente);
                 h1.start();
             }

@@ -31,6 +31,7 @@ public class HiloServidor extends Thread{
         finally {
             try {
                 cliente.close();
+                System.out.println("Cliente Desconectado");
             } catch (IOException e) {
                 System.out.println("Error con el cliente "+cliente.getInetAddress()+": "+e.getMessage());
             }
