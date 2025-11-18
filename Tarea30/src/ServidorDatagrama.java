@@ -11,10 +11,7 @@ public class ServidorDatagrama {
     public static void main(String[] args) {
         int puerto = 6666;
         byte[] buffer = new byte[1024];
-        String[] preguntas = new String[3];
-        preguntas[0] = "Pierde";
-        preguntas[1] = "la";
-        preguntas[2] = "cabeza";
+        String[] preguntas = {"Pierde","la","cabeza"};
 
         try (DatagramSocket datagramSocket = new DatagramSocket(puerto);){
             System.out.println("Servidor arrancando");

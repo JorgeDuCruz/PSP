@@ -13,10 +13,7 @@ public class ClienteDatagrama {
 
         int puerto_servidor = 6666;
         byte[] buffer = new byte[1024];
-        String[] preguntas = new String[3];
-        preguntas[0] = "Sin tele";
-        preguntas[1] = "y sin cerveza";
-        preguntas[2] = "Homer";
+        String[] respuestas = {"Sin tele","y sin cerveza","Homer"};
 
         try {
             InetAddress direccionServidor = InetAddress.getByName("localhost");
@@ -26,7 +23,7 @@ public class ClienteDatagrama {
             DatagramSocket datagramSocket = new DatagramSocket();
             DatagramPacket peticion = new DatagramPacket(buffer, buffer.length);
 
-            for (String pregunta1:preguntas) {
+            for (String pregunta1:respuestas) {
 
 
                 String msj = pregunta1;
