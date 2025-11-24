@@ -24,9 +24,10 @@ public class Cliente {
                 mensaje = sc.nextLine();
 
                 escritor.println(mensaje);
+                if (mensaje.equalsIgnoreCase("adios")) break;
                 respuesta = lector.readLine();
                 System.out.println(respuesta);
-                if (mensaje.equalsIgnoreCase("adios")) break;
+
             }
 
 

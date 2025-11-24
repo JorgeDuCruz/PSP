@@ -20,9 +20,10 @@ public class Servidor {
 
             while (true){
                 mensaje = lector.readLine();
+                if (mensaje == null || mensaje.equalsIgnoreCase("adios")) break;
                 respuesta = "ECO: "+mensaje;
                 escritor.println(respuesta);
-                if (mensaje == null || mensaje.equalsIgnoreCase("adios")) break;
+
             }
 
             System.out.println("Servidor ha enviado la info");
