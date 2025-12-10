@@ -12,7 +12,7 @@ public class Main {
         try {
             Scanner sc = new Scanner(System.in);
             String url1,url2,urlVel,urlGran;
-            long url1V,url2V,url1T,url2T,VelMax,TamMax;
+            long url1V,url2V,url1T,url2T,VelMin,TamMax;
 
             System.out.println("Primera URL a comparar?");
             url1 = sc.nextLine();
@@ -52,15 +52,15 @@ public class Main {
                 System.out.println("Ambas webs tardaron los mismo");
             }
             else {
-                if (url1V>url2V){
+                if (url1V<url2V){
                     urlVel = url1;
-                    VelMax = url1V;
+                    VelMin = url1V;
                 }
                 else {
                     urlVel = url2;
-                    VelMax = url2V;
+                    VelMin = url2V;
                 }
-                System.out.println("La web más rápida ha sido: ["+urlVel+"] con ["+VelMax+"] ms.");
+                System.out.println("La web más rápida ha sido: ["+urlVel+"] con ["+VelMin+"] ms.");
             }
 
 
