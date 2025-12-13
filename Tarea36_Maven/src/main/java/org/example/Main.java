@@ -1,13 +1,11 @@
 package org.example;
 
 import jakarta.mail.*;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeMessage;
 
 import java.util.Properties;
 
 public class Main {
-    static void main() throws MessagingException {
+    static void main() {
         //Preparando sesión
         Properties props = new Properties();
         props.put("mail.smtp.host","sandbox.smtp.mailtrap.io");

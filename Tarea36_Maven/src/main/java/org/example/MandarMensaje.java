@@ -8,7 +8,7 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
 public class MandarMensaje {
-    public static void MandarMensaje(Session session){
+    public static void mandarMensaje(Session session){
         //Enviar Mensaje
         try{
             MimeMessage msg = new MimeMessage(session);
