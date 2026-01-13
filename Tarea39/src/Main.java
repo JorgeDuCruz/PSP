@@ -57,4 +57,26 @@ public class Main {
         }
         return false;
     }
+
+    public static boolean fuerzaBruta(String hash){
+        Hilos h1 = new Hilos(hash, new char[]{'a', 'f'});
+        Hilos h2 = new Hilos(hash, new char[]{'g', 'm'});
+        Hilos h3 = new Hilos(hash, new char[]{'n', 't'});
+        Hilos h4 = new Hilos(hash, new char[]{'o', 'z'});
+        Hilos[] hilos = {h1,h2,h3,h4};
+        for (Hilos h:hilos){
+            h.setHilos(hilos);
+            h.start();
+        }
+        try {
+            h1.join();
+            h2.join();
+            h3.join();
+            h4.join();
+        } catch (InterruptedException e) {
+            System.out.println("Hilo interrumpido. "+e.getMessage());
+        }
+
+        return false;
+    }
 }
