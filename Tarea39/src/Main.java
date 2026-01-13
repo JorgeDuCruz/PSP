@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int opcion;
+        boolean encontrada;
         do {
             System.out.println("""
                     Elige una opción
@@ -18,7 +19,7 @@ public class Main {
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1: {
-                    comprobarHash("Jueves");
+                    encontrada = comprobarHash("Jueves");
                     break;
                 }
                 default:{
@@ -44,6 +45,15 @@ public class Main {
             System.out.println("Fichero no encontrado. "+e.getMessage());
         } catch (IOException e) {
             System.out.println("Error al leer la linea. "+e.getMessage());
+        }
+        return false;
+    }
+
+    public static boolean descifrarCesar(String frase){
+        String[] palabras = frase.split(" ");
+        char[] letras = palabras[0].toCharArray();
+        for (int i = 1;i<28;i++){
+
         }
         return false;
     }
