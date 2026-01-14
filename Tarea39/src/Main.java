@@ -22,6 +22,9 @@ public class Main {
                     encontrada = comprobarHash("Jueves");
                     break;
                 }
+                case 2: {
+                    encontrada = descifrarCesar("KRÑD OXPGR");
+                }
                 default:{
                     opcion = 0;
                 }
@@ -51,9 +54,16 @@ public class Main {
 
     public static boolean descifrarCesar(String frase){
         String[] palabras = frase.split(" ");
-        char[] letras = palabras[0].toCharArray();
+        String prueba,resultado;
+        int clave;
         for (int i = 1;i<28;i++){
-
+            prueba = CifrarCesar.cifrar(palabras[0],i);
+            if (UsarAPI.buscarPalabra(prueba)){
+                resultado = CifrarCesar.cifrar(frase,i);
+                clave = 27-i;
+                System.out.println("Mensaje Descifrado: "+resultado+" (Clave: "+clave+")");
+                return true;
+            }
         }
         return false;
     }
