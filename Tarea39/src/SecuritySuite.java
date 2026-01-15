@@ -1,14 +1,20 @@
+import Cesar.CifrarCesar;
+import Cesar.UsarAPI;
+import FuerzaBruta.Hilos;
+import FuerzaBruta.Resultado;
+import Hash.CompararHash;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Main {
+public class SecuritySuite {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int opcion;
-        boolean encontrada;
+        String encontrada;
         do {
             System.out.println("""
                     Elige una opción
@@ -19,7 +25,7 @@ public class Main {
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1: {
-                    encontrada = comprobarHash("8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918");
+                    encontrada = comprobarHash("4a630b8e79a0cd2fbae3f58e751abb28d0f4918f76af188d8996f13fabe08af8");
                     break;
                 }
                 case 2: {
@@ -27,7 +33,7 @@ public class Main {
                     break;
                 }
                 case 3:{
-                    encontrada = fuerzaBruta("7cb490742b4355548109df23f5f228815a8a7581f6e753a14bea8a43bd2dce85");
+                    encontrada = fuerzaBruta("4a630b8e79a0cd2fbae3f58e751abb28d0f4918f76af188d8996f13fabe08af8");
                     break;
                 }
                 default:{
@@ -37,14 +43,14 @@ public class Main {
         }while (opcion!=0);
     }
 
-    public static boolean comprobarHash(String contrasena){
+    public static String comprobarHash(String contrasena){
         try {
             BufferedReader lector = new BufferedReader(new FileReader("src/diccionario.txt"));
             String linea = lector.readLine();
             while (linea != null){
                 if (CompararHash.compara(contrasena,linea)){
                     System.out.println("¡CONTRASEÑA ENCONTRADA! La clave es: "+linea);
-                    return true;
+                    return linea;
                 }
                 linea = lector.readLine();
             }
@@ -54,10 +60,11 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Error al leer la linea. "+e.getMessage());
         }
-        return false;
+        System.out.println("Contraseña no encontrada en el diccionario.");
+        return null;
     }
 
-    public static boolean descifrarCesar(String frase){
+    public static String descifrarCesar(String frase){
         String[] palabras = frase.split(" ");
         String prueba,resultado;
         int clave;
@@ -67,13 +74,14 @@ public class Main {
                 resultado = CifrarCesar.cifrar(frase,i);
                 clave = 27-i;
                 System.out.println("Mensaje Descifrado: "+resultado+" (Clave: "+clave+")");
-                return true;
+                return resultado;
             }
         }
-        return false;
+        System.out.println("Mensaje no descifrado");
+        return null;
     }
 
-    public static boolean fuerzaBruta(String hash){
+    public static String fuerzaBruta(String hash){
         Hilos h1 = new Hilos(hash, new char[]{'a', 'f'});
         Hilos h2 = new Hilos(hash, new char[]{'g', 'm'});
         Hilos h3 = new Hilos(hash, new char[]{'n', 't'});
@@ -88,10 +96,21 @@ public class Main {
             h2.join();
             h3.join();
             h4.join();
+
+            String contrasena = Resultado.contrasena.get();
+
+            if (contrasena != null){
+                System.out.println("Contraseña es "+contrasena);
+            }
+            else {
+                System.out.println("Contraseña no encontrada");
+            }
+            return contrasena;
+
         } catch (InterruptedException e) {
             System.out.println("Hilo interrumpido. "+e.getMessage());
         }
 
-        return false;
+        return null;
     }
 }

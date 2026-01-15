@@ -1,8 +1,6 @@
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.HexFormat;
-import java.util.Scanner;
+package FuerzaBruta;
+
+import Hash.CompararHash;
 
 public class Hilos extends Thread{
     private Hilos[] hilos;
@@ -23,26 +21,28 @@ public class Hilos extends Thread{
     public void run(){
         String alfabeto = "abcdefghijklmnñopqrstuvwxyz",contra;
         char[] alf = alfabeto.toCharArray(),pruebas = new char[4];
-        for (char letra:letras){
+        char letra = letras[0];
+        while (letra <= letras[1]){
             pruebas[0] = letra;
             for (char l:alf){
                 pruebas[1] = l;
                 for (char j:alf){
                     pruebas[2] = j;
                     for (char p:alf){
+                        if (Thread.currentThread().isInterrupted()) return;
                         pruebas[3] = p;
                         contra = new String(pruebas);
                         if (CompararHash.compara(hash,contra)){
                             for (Hilos h:hilos){
                                 if (h != this) h.interrupt();
                             }
-                            System.out.println("Contraseña es "+contra);
-                            interrupt();
+                            Resultado.contrasena.compareAndSet(null,contra);
+                            return;
                         }
-                        System.out.println("Probe: "+contra+" Soy el hilo: "+getName());
                     }
                 }
             }
+            letra = (char) (letra+1);
         }
     }
 
