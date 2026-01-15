@@ -1,5 +1,6 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.Scanner;
 
@@ -20,45 +21,29 @@ public class Hilos extends Thread{
 
     @Override
     public void run(){
-        String alfabeto = "abcdefghijklmnñopqrstuvwxyz",pruebas,hp;
-        char[] alf = alfabeto.toCharArray();
+        String alfabeto = "abcdefghijklmnñopqrstuvwxyz",contra;
+        char[] alf = alfabeto.toCharArray(),pruebas = new char[4];
         for (char letra:letras){
-            pruebas = ""+letra;
+            pruebas[0] = letra;
             for (char l:alf){
-                pruebas = pruebas+l;
+                pruebas[1] = l;
                 for (char j:alf){
-                    pruebas = pruebas+j;
+                    pruebas[2] = j;
                     for (char p:alf){
-                        pruebas = pruebas+p;
-                        hp = hashear(pruebas);
-                        if (hash.equals(hp)){
-                            System.out.println("Contraseña es "+pruebas);
+                        pruebas[3] = p;
+                        contra = new String(pruebas);
+                        if (CompararHash.compara(hash,contra)){
                             for (Hilos h:hilos){
-                                h.interrupt();
+                                if (h != this) h.interrupt();
                             }
+                            System.out.println("Contraseña es "+contra);
+                            interrupt();
                         }
-                        else pruebas = pruebas+"\b";
+                        System.out.println("Probe: "+contra+" Soy el hilo: "+getName());
                     }
-                    pruebas = pruebas+"\b";
                 }
-                pruebas = pruebas+"\b";
             }
         }
     }
 
-    private String hashear(String texto){
-        String has;
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-            md.update(texto.getBytes());
-            has = HexFormat.of().formatHex(md.digest());
-            return has;
-
-
-        } catch (NoSuchAlgorithmException e) {
-            System.out.println("Erro con el algoritmo de hashing "+e.getMessage());
-        }
-        return null;
-    }
 }

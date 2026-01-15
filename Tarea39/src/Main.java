@@ -19,11 +19,16 @@ public class Main {
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1: {
-                    encontrada = comprobarHash("Jueves");
+                    encontrada = comprobarHash("8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918");
                     break;
                 }
                 case 2: {
                     encontrada = descifrarCesar("KRÑD OXPGR");
+                    break;
+                }
+                case 3:{
+                    encontrada = fuerzaBruta("7cb490742b4355548109df23f5f228815a8a7581f6e753a14bea8a43bd2dce85");
+                    break;
                 }
                 default:{
                     opcion = 0;
@@ -37,7 +42,7 @@ public class Main {
             BufferedReader lector = new BufferedReader(new FileReader("src/diccionario.txt"));
             String linea = lector.readLine();
             while (linea != null){
-                if (linea.equals(contrasena)){
+                if (CompararHash.compara(contrasena,linea)){
                     System.out.println("¡CONTRASEÑA ENCONTRADA! La clave es: "+linea);
                     return true;
                 }
